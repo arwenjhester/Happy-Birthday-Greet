@@ -867,6 +867,10 @@ button {
     border-radius: 5px 20px 5px 20px;
 }
 
+.card-six {
+    border-radius: 20px 5px 20px 5px;
+}
+
 
 /* =========================================
    CARD HEADER
@@ -1032,6 +1036,16 @@ button {
     top: -30px;
 
     animation-delay: 2s;
+}
+
+.sticker-six {
+    width: 80px;
+
+    right: 44%;
+
+    bottom: -30px;
+
+    animation-delay: 1.5s;
 }
 
 
