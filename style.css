@@ -1039,13 +1039,13 @@ button {
 }
 
 .sticker-six {
-    width: 80px;
+   width: 75px;
 
-    right: 44%;
+    left: 43%;
 
-    bottom: 0px;
+    top: -30px;
 
-    animation-delay: 1.5s;
+    animation-delay: 2s;
 }
 
 
