@@ -24,7 +24,7 @@ if (startButton) {
 const audio = document.getElementById("birthdayAudio");
 const musicButton = document.getElementById("musicToggle");
 
-const musicStart = 25;
+const musicStart = 22;
 
 
 // Start music on main page
