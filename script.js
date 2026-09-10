@@ -38,12 +38,12 @@ function fadeInMusic() {
 
     const fade = setInterval(function () {
 
-        if (volume < 0.8) {
+        if (volume < 0.75) {
 
-    volume += 0.02;
+    volume += 0.01;
 
-    if (volume > 0.8) {
-        volume = 0.8;
+    if (volume > 0.75) {
+        volume = 0.75;
     }
 
     audio.volume = volume;
@@ -54,7 +54,7 @@ function fadeInMusic() {
 
         }
 
-    }, 100);
+    }, 250);
 }
 
 
