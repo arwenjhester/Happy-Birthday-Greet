@@ -11,49 +11,114 @@ if (startButton) {
 const audio = document.getElementById("birthdayAudio");
 const musicButton = document.getElementById("musicToggle");
 
-const musicStart = 27;
 
+// =========================================
+// MUSIC SETTINGS
+// =========================================
+
+const musicStart = 25;
+
+
+// =========================================
+// FADE IN MUSIC
+// =========================================
+
+function fadeInMusic() {
+
+    if (!audio) return;
+
+    // Start quietly
+    audio.volume = 0.1;
+
+    audio.play().catch(function () {
+        console.log("Music needs to be started manually.");
+    });
+
+    let volume = 0.1;
+
+    const fade = setInterval(function () {
+
+        if (volume < 1) {
+
+            volume += 0.02;
+
+            if (volume > 1) {
+                volume = 1;
+            }
+
+            audio.volume = volume;
+
+        } else {
+
+            clearInterval(fade);
+
+        }
+
+    }, 80);
+}
+
+
+// =========================================
+// START MUSIC AT 25 SECONDS
+// =========================================
 
 if (audio && document.body.classList.contains("main-page")) {
 
     function startMusic() {
+
         audio.currentTime = musicStart;
 
-        audio.play().catch(function () {
-            console.log("Music needs to be started manually.");
-        });
+        fadeInMusic();
+
     }
+
 
     if (sessionStorage.getItem("musicStarted") === "yes") {
 
         if (audio.readyState >= 1) {
+
             startMusic();
+
         } else {
+
             audio.addEventListener("loadedmetadata", startMusic, {
                 once: true
             });
+
         }
+
     }
+
 }
 
 
+// =========================================
+// LOOP MUSIC BACK TO 25 SECONDS
+// =========================================
+
 if (audio) {
+
     audio.addEventListener("timeupdate", function () {
 
         if (
             audio.duration &&
             audio.currentTime >= audio.duration - 0.2
         ) {
+
             audio.currentTime = musicStart;
 
-            audio.play().catch(function () {
-                console.log("Music needs to be started manually.");
-            });
+            fadeInMusic();
+
         }
 
     });
+
 }
 
+
+// =========================================
+// MUSIC BUTTON
+// =========================================
 
 if (musicButton && audio) {
 
@@ -65,7 +130,7 @@ if (musicButton && audio) {
                 audio.currentTime = musicStart;
             }
 
-            audio.play();
+            fadeInMusic();
 
             musicButton.textContent = "♫";
 
@@ -74,11 +139,17 @@ if (musicButton && audio) {
             audio.pause();
 
             musicButton.textContent = "♪";
+
         }
 
     });
+
 }
 
+
+// =========================================
+// CARD SCROLL REVEAL
+// =========================================
 
 const cards = document.querySelectorAll(".reveal");
 
