@@ -1,82 +1,84 @@
-// ===============================
-// START BUTTON
-// ===============================
-
 const startButton = document.getElementById("startButton");
 
 if (startButton) {
     startButton.addEventListener("click", function () {
-
-        // Remember that music was started
         sessionStorage.setItem("musicStarted", "yes");
-
-        // Go to the main birthday page
         window.location.href = "main.html";
-
     });
 }
 
 
-// ===============================
-// MUSIC
-// ===============================
-
 const audio = document.getElementById("birthdayAudio");
 const musicButton = document.getElementById("musicToggle");
 
-const musicStart = 15;
+const musicStart = 25;
 
 
-// Start music on main page
 if (audio && document.body.classList.contains("main-page")) {
 
-    if (sessionStorage.getItem("musicStarted") === "yes") {
-
+    function startMusic() {
         audio.currentTime = musicStart;
 
         audio.play().catch(function () {
             console.log("Music needs to be started manually.");
         });
     }
+
+    if (sessionStorage.getItem("musicStarted") === "yes") {
+
+        if (audio.readyState >= 1) {
+            startMusic();
+        } else {
+            audio.addEventListener("loadedmetadata", startMusic, {
+                once: true
+            });
+        }
+    }
 }
 
 
-// Loop the selected part of the song
 if (audio) {
-
     audio.addEventListener("timeupdate", function () {
 
-        if (audio.currentTime >= audio.duration - 0.2) {
-
+        if (
+            audio.duration &&
+            audio.currentTime >= audio.duration - 0.2
+        ) {
             audio.currentTime = musicStart;
-            audio.play();
 
+            audio.play().catch(function () {
+                console.log("Music needs to be started manually.");
+            });
         }
 
     });
 }
 
 
-// Music on/off button
 if (musicButton && audio) {
 
     musicButton.addEventListener("click", function () {
 
         if (audio.paused) {
+
+            if (audio.currentTime < musicStart) {
+                audio.currentTime = musicStart;
+            }
+
             audio.play();
+
             musicButton.textContent = "♫";
+
         } else {
+
             audio.pause();
+
             musicButton.textContent = "♪";
         }
 
     });
 }
 
-
-// ===============================
-// MESSAGE CARD ANIMATION
-// ===============================
 
 const cards = document.querySelectorAll(".reveal");
 
