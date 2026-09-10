@@ -1,102 +1,348 @@
-const startButton = document.getElementById("startButton");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-if (startButton) {
-    startButton.addEventListener("click", function () {
-        sessionStorage.setItem("musicStarted", "yes");
-        window.location.href = "main.html";
-    });
-}
+    <title>Birthday Quest ♡</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-const audio = document.getElementById("birthdayAudio");
-const musicButton = document.getElementById("musicToggle");
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-const musicStart = 25;
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body class="main-page">
 
-if (audio && document.body.classList.contains("main-page")) {
+    <!-- Galaxy background -->
+    <div class="galaxy">
+        <div class="stars stars-one"></div>
+        <div class="stars stars-two"></div>
+        <div class="stars stars-three"></div>
 
-    function startMusic() {
-        audio.currentTime = musicStart;
+        <div class="nebula nebula-one"></div>
+        <div class="nebula nebula-two"></div>
 
-        audio.play().catch(function () {
-            console.log("Music needs to be started manually.");
-        });
-    }
+        <div class="shooting-star shooting-one"></div>
+        <div class="shooting-star shooting-two"></div>
+    </div>
 
-    if (sessionStorage.getItem("musicStarted") === "yes") {
+    <!-- Page content -->
+    <main class="journey-container">
 
-        if (audio.readyState >= 1) {
-            startMusic();
-        } else {
-            audio.addEventListener("loadedmetadata", startMusic, {
-                once: true
-            });
-        }
-    }
-}
+        <!-- Header -->
+        <header class="journey-header reveal">
+            <div class="header-decoration">
+                ✦ ───────── ♥ ───────── ✦
+            </div>
 
+            <p class="quest-label">
+                BIRTHDAY QUEST
+            </p>
 
-if (audio) {
-    audio.addEventListener("timeupdate", function () {
+            <h1>
+                A LITTLE<br>
+                MESSAGE FOR YOU
+            </h1>
 
-        if (
-            audio.duration &&
-            audio.currentTime >= audio.duration - 0.2
-        ) {
-            audio.currentTime = musicStart;
+            <p class="journey-subtitle">
+                scroll down ♡
+            </p>
 
-            audio.play().catch(function () {
-                console.log("Music needs to be started manually.");
-            });
-        }
-
-    });
-}
-
-
-if (musicButton && audio) {
-
-    musicButton.addEventListener("click", function () {
-
-        if (audio.paused) {
-
-            if (audio.currentTime < musicStart) {
-                audio.currentTime = musicStart;
-            }
-
-            audio.play();
-
-            musicButton.textContent = "♫";
-
-        } else {
-
-            audio.pause();
-
-            musicButton.textContent = "♪";
-        }
-
-    });
-}
+            <div class="scroll-arrow">
+                ↓
+            </div>
+        </header>
 
 
-const cards = document.querySelectorAll(".reveal");
+        <!-- ========================= -->
+        <!-- MESSAGE 1 — LEFT -->
+        <!-- ========================= -->
 
-const observer = new IntersectionObserver(function (entries) {
+        <section class="message-row left reveal">
 
-    entries.forEach(function (entry) {
+            
+            <img
+                src="assets/stickers/sticker1.png"
+                class="sticker sticker-one"
+                alt=""
+            >
+            
 
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        }
+            <article class="message-card card-one">
 
-    });
+                <div class="card-top">
+                    <span>MESSAGE 01</span>
+                    <span>♡</span>
+                </div>
 
-}, {
-    threshold: 0.15
-});
+                <div class="card-decoration">
+                    ✦
+                </div>
+
+                <div class="card-content">
+                    <p>
+                        Happy birthday, Lea! Today is your special day, and I wish you all the best. I hope you enjoy your time today. We’ve only known each other for a short time, so I don’t want to pretend that I know you better than I actually do. But from what I’ve seen so far, I’m really glad to know you, and I would love to know more about you.
+                    </p>
+                </div>
+
+                <div class="card-bottom">
+                    <span>✧</span>
+                    <span>♡</span>
+                    <span>✧</span>
+                </div>
+
+            </article>
+
+        </section>
 
 
-cards.forEach(function (card) {
-    observer.observe(card);
-});
+        <!-- ========================= -->
+        <!-- MESSAGE 2 — RIGHT -->
+        <!-- ========================= -->
+
+        <section class="message-row right reveal">
+
+            
+            <img
+                src="assets/stickers/sticker2.png"
+                class="sticker sticker-two"
+                alt=""
+            >
+            
+
+            <article class="message-card card-two">
+
+                <div class="card-top">
+                    <span>MESSAGE 02</span>
+                    <span>✉</span>
+                </div>
+
+                <div class="card-decoration">
+                    ♡
+                </div>
+
+                <div class="card-content">
+                    <p>
+                        There are probably a lot of things I still don’t know about you. Your favorite songs, the things you’re passionate about, the things that make you laugh, and the things you keep to yourself. I hope someday I get to know some of them, and I hope I’ve made you comfortable enough to share them with me.
+                    </p>
+                </div>
+
+                <div class="card-bottom">
+                    <span>♡</span>
+                    <span>✦</span>
+                    <span>♡</span>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MESSAGE 3 — LEFT -->
+        <!-- ========================= -->
+
+        <section class="message-row left reveal">
+
+            
+            <img
+                src="assets/stickers/sticker3.png"
+                class="sticker sticker-three"
+                alt=""
+            >
+            
+
+            <article class="message-card card-three">
+
+                <div class="card-top">
+                    <span>MESSAGE 03</span>
+                    <span>✦</span>
+                </div>
+
+                <div class="card-decoration">
+                    ⋆
+                </div>
+
+                <div class="card-content">
+                    <p>
+                        I really do feel comfortable around you. I don’t feel like I have to hold myself back when talking to you. Sometimes, I wonder if I’m being too expressive to the point that I might disappoint you, but you’ve shown so much interest that I feel safe being myself around you.
+                    </p>
+                </div>
+
+                <div class="card-bottom">
+                    <span>✧</span>
+                    <span>♡</span>
+                    <span>✧</span>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MESSAGE 4 — RIGHT -->
+        <!-- ========================= -->
+
+        <section class="message-row right reveal">
+
+            
+            <img
+                src="assets/stickers/sticker4.png"
+                class="sticker sticker-four"
+                alt=""
+            >
+            
+
+            <article class="message-card card-four">
+
+                <div class="card-top">
+                    <span>MESSAGE 04</span>
+                    <span>♡</span>
+                </div>
+
+                <div class="card-decoration">
+                    ✧
+                </div>
+
+                <div class="card-content">
+                    <p>
+                        I don’t know where this connection is going, and maybe that’s okay. Some of the best things start without knowing where they’ll end. I know I don’t know much about you yet, but I think that’s one of the things I like. There’s still so much about you that I haven’t discovered.
+                    </p>
+                </div>
+
+                <div class="card-bottom">
+                    <span>♥</span>
+                    <span>✦</span>
+                    <span>♥</span>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MESSAGE 5 — LEFT -->
+        <!-- ========================= -->
+
+        <section class="message-row left reveal">
+
+            
+            <img
+                src="assets/stickers/sticker5.png"
+                class="sticker sticker-five"
+                alt=""
+            >
+            
+
+            <article class="message-card card-five">
+
+                <div class="card-top">
+                    <span>MESSAGE 05</span>
+                    <span>♥</span>
+                </div>
+
+                <div class="card-decoration">
+                    ✦
+                </div>
+
+                <div class="card-content">
+                    <p>
+                        I think this kind of relationship is not something you encounter every day, so while we’re still here, I want to put a lot of effort into it. Once a year lang din naman, all out ko na. You might feel weird or think this whole thing is a little OA, but I think you deserve this.
+                    </p>
+                </div>
+
+                <div class="card-bottom">
+                    <span>♡</span>
+                    <span>✧</span>
+                    <span>♡</span>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- P.S. MESSAGE -->
+        <!-- ========================= -->
+
+        <section class="ps-section reveal">
+
+            <div class="ps-star">✦</div>
+
+            <div class="ps-bubble">
+                <div class="ps-label">
+                    P.S.
+                </div>
+
+                <p>
+                    P.S Of course I'm trying to impress you kaya binigay ko 'to. jk baby enjoy ur day.
+                </p>
+
+                <span class="bubble-tail"></span>
+            </div>
+
+            <div class="ps-heart">
+                ♡
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- FINAL -->
+        <!-- ========================= -->
+
+        <section class="final-section reveal">
+
+            <div class="final-stars">
+                ✦　✧　♥　✧　✦
+            </div>
+
+            <p class="final-small">
+                QUEST COMPLETE
+            </p>
+
+            <h2>
+                HAPPY<br>
+                BIRTHDAY!
+            </h2>
+
+            <p class="final-message">
+                MAMAAAAA
+            </p>
+
+            <div class="final-decoration">
+                ✦ ── ♥ ── ✦
+            </div>
+
+        </section>
+
+
+        <footer>
+            In loving memory of Rene Baterbonia
+        </footer>
+
+    </main>
+
+
+    <!-- Music control -->
+    <button id="musicToggle" class="music-toggle">
+        ♫
+    </button>
+
+
+    <audio id="birthdayAudio" preload="auto">
+        <source src="assets/audio/birthday-song.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
