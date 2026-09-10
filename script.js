@@ -27,36 +27,38 @@ function fadeInMusic() {
 
     if (!audio) return;
 
-    // Start quietly
-    audio.volume = 0.1;
+    const startVolume = 0;
+    const targetVolume = 0.5;
+    const fadeDuration = 10000; // 10 seconds
 
-    audio.play().catch(function () {
-        console.log("Music needs to be started manually.");
-    });
+    audio.volume = startVolume;
 
-    let volume = 0.1;
+    audio.play().then(function () {
 
-    const fade = setInterval(function () {
+        const startTime = performance.now();
 
-        if (volume < 0.5) {
+        function fade(timestamp) {
 
-    volume += 0.01;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / fadeDuration, 1);
 
-    if (volume > 0.5) {
-        volume = 0.5;
-    }
+            audio.volume =
+                startVolume +
+                (targetVolume - startVolume) * progress;
 
-    audio.volume = volume;
-
-        } else {
-
-            clearInterval(fade);
-
+            if (progress < 1) {
+                requestAnimationFrame(fade);
+            } else {
+                audio.volume = targetVolume;
+            }
         }
 
-    }, 400);
-}
+        requestAnimationFrame(fade);
 
+    }).catch(function () {
+        console.log("Music needs to be started manually.");
+    });
+}
 
 // =========================================
 // START MUSIC AT 25 SECONDS
