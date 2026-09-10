@@ -11,7 +11,7 @@ if (startButton) {
 const audio = document.getElementById("birthdayAudio");
 const musicButton = document.getElementById("musicToggle");
 
-const musicStart = 25;
+const musicStart = 27;
 
 
 if (audio && document.body.classList.contains("main-page")) {
