@@ -258,3 +258,137 @@ const observer = new IntersectionObserver(function (entries) {
 cards.forEach(function (card) {
     observer.observe(card);
 });
+
+/* =========================================
+   PAGE 2 CONFETTI CANNON
+========================================= */
+
+function createPageBurst() {
+
+    const colors = [
+        "#FF70BF",
+        "#D552A3",
+        "#831C91",
+        "#FFFFFF",
+        "#FFD8EF",
+        "#FFD86B"
+    ];
+
+    const confettiCount = 140;
+
+    function createConfettiPiece(side) {
+
+        const confetti = document.createElement("span");
+        confetti.classList.add("page-confetti");
+
+        confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        const size = Math.random() * 7 + 4;
+
+        confetti.style.width = size + "px";
+        confetti.style.height = size * 1.5 + "px";
+
+        /*
+         * LEFT CANNON
+         * Shoots toward the upper-right.
+         */
+        if (side === "left") {
+
+            confetti.style.left =
+                (Math.random() * 7 + 1) + "vw";
+
+            confetti.style.bottom =
+                (Math.random() * 5 + 1) + "vh";
+
+            const x =
+                Math.random() * (window.innerWidth * 0.48) +
+                window.innerWidth * 0.05;
+
+            const y =
+                -(Math.random() * (window.innerHeight * 0.75) +
+                window.innerHeight * 0.25);
+
+            confetti.style.setProperty(
+                "--confetti-x",
+                x + "px"
+            );
+
+            confetti.style.setProperty(
+                "--confetti-y",
+                y + "px"
+            );
+        }
+
+        /*
+         * RIGHT CANNON
+         * Shoots toward the upper-left.
+         */
+        else {
+
+            confetti.style.right =
+                (Math.random() * 7 + 1) + "vw";
+
+            confetti.style.bottom =
+                (Math.random() * 5 + 1) + "vh";
+
+            const x =
+                -(Math.random() * (window.innerWidth * 0.48) +
+                window.innerWidth * 0.05);
+
+            const y =
+                -(Math.random() * (window.innerHeight * 0.75) +
+                window.innerHeight * 0.25);
+
+            confetti.style.setProperty(
+                "--confetti-x",
+                x + "px"
+            );
+
+            confetti.style.setProperty(
+                "--confetti-y",
+                y + "px"
+            );
+        }
+
+        confetti.style.setProperty(
+            "--rotation",
+            (Math.random() * 1440 - 720) + "deg"
+        );
+
+        confetti.style.setProperty(
+            "--delay",
+            (Math.random() * 0.35) + "s"
+        );
+
+        document.body.appendChild(confetti);
+
+        setTimeout(function () {
+            confetti.remove();
+        }, 4000);
+    }
+
+
+    /*
+     * Split the confetti between both cannons.
+     */
+    for (let i = 0; i < confettiCount / 2; i++) {
+
+        createConfettiPiece("left");
+        createConfettiPiece("right");
+
+    }
+}
+
+
+/* =========================================
+   START PAGE 2 CONFETTI
+========================================= */
+
+if (document.body.classList.contains("main-page")) {
+
+    setTimeout(function () {
+        createPageBurst();
+    }, 150);
+
+}
